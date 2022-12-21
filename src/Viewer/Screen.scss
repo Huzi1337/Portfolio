@@ -1,0 +1,140 @@
+$color1: #222830;
+$color2: #29313d;
+$color3: #1e242d;
+$color4: #3cd281;
+$shadowColor: #16191e;
+
+%textBase {
+  position: fixed;
+  top: 20px;
+
+  font-style: normal;
+}
+
+.Screen {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: $color1;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  h1 {
+    @extend %textBase;
+    left: 20px;
+    font-weight: 900;
+    color: #fafafa;
+    font-size: 20px;
+  }
+
+  h2 {
+    @extend %textBase;
+    right: 20px;
+    margin: 5px 0 0 0;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    color: $color4;
+    line-height: 45px;
+    letter-spacing: 0.1em;
+  }
+  h3 {
+    @extend h2;
+    filter: blur(2px);
+  }
+}
+
+.Viewer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  max-width: 414px;
+  max-height: 896px;
+  min-width: 212px;
+  min-height: 448px;
+
+  margin: 50px;
+
+  background: $color3;
+  border: solid 10px $color2;
+  border-radius: 12px;
+  box-shadow: 0px 4px 22px $shadowColor, inset 0px 0px 12px $shadowColor;
+}
+
+.Top {
+  width: 47px;
+  height: 3px;
+  border-radius: 3px;
+  background: $color3;
+}
+
+.NavBar {
+  width: 100%;
+  min-height: 7.5%;
+
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  grid-template-rows: 100%;
+  align-content: space-between;
+
+  background: $color2;
+  align-self: flex-end;
+
+  button {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    border: 0;
+  }
+
+  %navigationArrow {
+    width: 30px;
+    height: 30px;
+    place-self: center;
+  }
+
+  .forward {
+    @extend %navigationArrow;
+    background-image: url(../Assets/Right.svg);
+  }
+  .back {
+    @extend %navigationArrow;
+    background-image: url(../Assets/Left.svg);
+  }
+
+  %navigationTrack {
+    place-self: center center;
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .dropDown {
+    @extend %navigationTrack;
+    border: 2px solid #ffffff;
+    width: 220px;
+    height: 70%;
+  }
+
+  .tracker {
+    @extend %navigationTrack;
+    width: 62px;
+    height: 62px;
+    max-height: 100%;
+    margin: 0 0 0 320px;
+    border-radius: 45px;
+    border: 2px solid $color4;
+    background-color: transparent;
+    color: $color4;
+    text-align: center;
+    line-height: 60px;
+  }
+}
+
+@media screen and (max-height: 900px) {
+  .Viewer {
+    max-width: 280px;
+  }
+}
