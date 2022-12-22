@@ -32,6 +32,7 @@ $shadowColor: #16191e;
   h2 {
     @extend %textBase;
     right: 20px;
+    top: 7.5px;
     margin: 5px 0 0 0;
 
     font-style: normal;
@@ -62,6 +63,8 @@ $shadowColor: #16191e;
   border: solid 10px $color2;
   border-radius: 12px;
   box-shadow: 0px 4px 22px $shadowColor, inset 0px 0px 12px $shadowColor;
+
+  overflow: hidden;
 }
 
 .Top {
@@ -98,11 +101,11 @@ $shadowColor: #16191e;
 
   .forward {
     @extend %navigationArrow;
-    background-image: url(../Assets/Right.svg);
+    background-image: url(../../public/Assets/Right.svg);
   }
   .back {
     @extend %navigationArrow;
-    background-image: url(../Assets/Left.svg);
+    background-image: url(../../public/Assets/Left.svg);
   }
 
   %navigationTrack {
@@ -113,9 +116,10 @@ $shadowColor: #16191e;
 
   .dropDown {
     @extend %navigationTrack;
-    border: 2px solid #ffffff;
-    width: 220px;
-    height: 70%;
+    //width: 220px;
+    //height: 70%;
+    border: 2px solid $color4;
+    border-radius: 10px;
   }
 
   .tracker {

@@ -1,36 +1,49 @@
 import "./Screen.scss";
 import { useReducer } from "react";
+import DropdownButton from "react-bootstrap/DropdownButton";
 import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap";
+import React from "react";
 
-const initialState = { count: 1 };
-const limit = 12;
+interface stateM {
+  dispatch: React.Dispatch<{
+    type: "back" | "set" | "forward";
+    payload?: number;
+  }>;
+  state: { count: number };
+  projects: string[];
+}
 
-const reducer = (state: { count: number }, action: { type: string }) => {
-  switch (action.type) {
-    case "forward":
-      if (state.count + 1 > limit) return { count: 1 };
-      return { count: state.count + 1 };
-    case "back":
-      if (state.count === 1) return { count: limit };
-      return { count: state.count - 1 };
-    default:
-      throw new Error();
-  }
-};
-
-const NavBar = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+const NavBar: React.FC<stateM> = (props) => {
   return (
     <div className="NavBar">
-      <button className="back" onClick={() => dispatch({ type: "back" })} />
-      <button className="dropDown">Projekt {state.count}</button>
+      <button
+        className="back"
+        onClick={() => props.dispatch({ type: "back" })}
+      />
+      <DropdownButton
+        id="dropdown-item-button"
+        title={props.projects[props.state.count]}
+        className="dropDown"
+        drop="up"
+      >
+        {props.projects.map((project: string, index) => {
+          return (
+            <Dropdown.Item
+              as="button"
+              onClick={() => props.dispatch({ type: "set", payload: index })}
+              key={index}
+            >
+              {project}
+            </Dropdown.Item>
+          );
+        })}
+      </DropdownButton>
       <div className="tracker">
-        {state.count}/{limit}
+        {props.state.count + 1}/{props.projects.length}
       </div>
       <button
         className="forward"
-        onClick={() => dispatch({ type: "forward" })}
+        onClick={() => props.dispatch({ type: "forward" })}
       />
     </div>
   );
