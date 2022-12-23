@@ -28,7 +28,7 @@ const P1 = () => {
   if (error) return <div>Failed to load</div>;
   if (isLoading) return <div>Loading...</div>;
 
-  const categories = Object.keys(data);
+  const categories = ["All"].concat(Object.keys(data));
 
   return (
     <Wrapper className="project-body">
@@ -58,16 +58,34 @@ const P1 = () => {
       </Wrapper>
 
       <div className="product-container">
-        {data[categories[focus]].map((product: productT, index: number) => {
-          return (
-            <Product
-              model={product.model}
-              price={product.price}
-              photo={product.photo}
-              key={index}
-            ></Product>
-          );
-        })}
+        {focus > 0
+          ? data[categories[focus]].map((product: productT, index: number) => {
+              return (
+                <Product
+                  model={product.model}
+                  price={product.price}
+                  photo={product.photo}
+                  key={index}
+                ></Product>
+              );
+            })
+          : categories.forEach((category: string, index1: number) => {
+              if (category === "All") {
+                console.log("boink");
+                return;
+              }
+              data[category].map((product: productT, index2: number) => {
+                return (
+                  <Product
+                    model={product.model}
+                    price={product.price}
+                    photo={product.photo}
+                    key={index1 + index2}
+                  ></Product>
+                );
+              });
+              return;
+            })}
       </div>
     </Wrapper>
   );
