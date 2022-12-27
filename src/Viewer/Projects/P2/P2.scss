@@ -1,0 +1,131 @@
+@use "../base";
+
+$color1: #fafafa;
+$color2: #442959;
+$color3: #653c85;
+$color4: #d6c3e5;
+
+.project-body-2 {
+  @extend %project-body-shared;
+  background-color: $color4;
+  .header {
+    position: relative;
+    right: 0px;
+    left: 0px;
+    display: flex;
+    height: 100%;
+    max-height: 10%;
+    padding-left: 20px;
+    margin: -20px -20px 0 -20px;
+    background-image: linear-gradient(to right, $color2, $color3);
+    align-items: center;
+    gap: 10px;
+    filter: drop-shadow(0px 2px 4px $color2);
+    h2 {
+      font-size: 25px;
+      margin: 0;
+      color: $color1;
+    }
+
+    .menu-button {
+      width: 24px;
+      height: 24px;
+      background-image: url(../../../../public/Assets/P2/menu.svg);
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: 0;
+    }
+  }
+  .content-container {
+    min-height: 90%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    margin-top: 15px;
+    gap: 15px;
+
+    .currency-container {
+      width: 100%;
+      display: flex;
+      background-color: $color1;
+      border-radius: 5px;
+      filter: drop-shadow(0px 2px 5px $color3);
+
+      .list-group-item {
+        display: grid;
+        grid-template-columns: 40% 30% 25% 5%;
+        row-gap: 10%;
+        grid-template-rows: 100%;
+        background-color: $color1;
+        h2 {
+          font-size: 18px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+        }
+        .bold {
+          font-weight: 900;
+          color: $color1;
+        }
+        .delta {
+          background-image: url(../../../../public/Assets/P2/delta.svg);
+          background-position: center;
+          background-repeat: no-repeat;
+          margin-top: 8px;
+          margin-bottom: 0px;
+          height: 18px;
+          width: 18px;
+        }
+        .delta.up {
+          background-image: url(../../../../public/Assets/P2/north.svg);
+        }
+        .delta.down {
+          background-image: url(../../../../public/Assets/P2/south.svg);
+        }
+      }
+      .list-group-item.first {
+        //background-image: linear-gradient(to right, $color2, $color3);
+        background-color: $color2;
+      }
+      .list-group-item.focus {
+        background-color: $color3;
+        color: $color1;
+      }
+    }
+    .chart-container {
+      display: flex;
+      flex-flow: column nowrap;
+      background-color: $color1;
+      padding: 20px;
+      border-radius: 5px;
+      flex-grow: 1;
+      align-items: center;
+      max-height: 55%;
+      filter: drop-shadow(0px 2px 5px $color3);
+    }
+  }
+}
+
+.sidemenu {
+  position: absolute;
+  width: 40%;
+  height: 92%;
+  top: 9.5%;
+  margin-left: -40%;
+  transition: margin-left 350ms;
+
+  background-color: $color2;
+
+  .list-group-item {
+    background-color: $color2;
+    color: $color1;
+  }
+
+  .list-group-item.active {
+    background-color: $color3;
+    border-color: $color3;
+  }
+}
+.toggle {
+  margin-left: 0;
+}
