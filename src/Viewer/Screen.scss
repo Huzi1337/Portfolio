@@ -4,11 +4,19 @@ $color3: #1e242d;
 $color4: #3cd281;
 $shadowColor: #16191e;
 
-%textBase {
-  position: fixed;
-  top: 20px;
+%neonBase {
+  position: relative;
+  top: -5px;
 
   font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  color: $color4;
+  line-height: 15px;
+  letter-spacing: 0.1em;
+
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .Screen {
@@ -21,38 +29,46 @@ $shadowColor: #16191e;
   justify-content: center;
   flex-direction: column;
 
+  .title {
+    position: fixed;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    top: 10px;
+    left: 20px;
+    right: 20px;
+  }
+
   h1 {
-    @extend %textBase;
     left: 20px;
     font-weight: 900;
     color: #fafafa;
     font-size: 20px;
   }
 
-  h2 {
-    @extend %textBase;
-    right: 20px;
-    top: 7.5px;
-    margin: 5px 0 0 0;
-
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    color: $color4;
-    line-height: 45px;
-    letter-spacing: 0.1em;
+  .portfolio-container {
+    align-self: flex-end;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
   }
-  h3 {
-    @extend h2;
+
+  .portfolio-text {
+    @extend %neonBase;
+  }
+  .portfolio-blur {
+    @extend %neonBase;
     filter: blur(2px);
+    margin-left: 2px;
   }
 }
 
 .Viewer {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
-  max-width: 414px;
+  max-width: 425px;
   max-height: 896px;
   min-width: 212px;
   min-height: 448px;
@@ -66,6 +82,26 @@ $shadowColor: #16191e;
 
   overflow: hidden;
 }
+.desktop {
+  max-width: 100%;
+  max-height: 100%;
+  .wrapper {
+    max-width: 180px;
+  }
+  .project-body-1 {
+    .category-container {
+      justify-content: flex-start;
+    }
+  }
+
+  .chart-container {
+    max-width: 325px;
+    align-self: center;
+  }
+  .sidemenu {
+    width: 162px;
+  }
+}
 
 .Top {
   width: 47px;
@@ -76,15 +112,16 @@ $shadowColor: #16191e;
 
 .NavBar {
   width: 100%;
-  min-height: 7.5%;
+  max-height: 10%;
+  padding: 10px;
+  filter: drop-shadow(-10px 0 10px $shadowColor);
 
-  display: grid;
-  grid-template-columns: 20% 60% 20%;
-  grid-template-rows: 100%;
-  align-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 
   background: $color2;
-  align-self: flex-end;
 
   button {
     background-repeat: no-repeat;
@@ -96,9 +133,17 @@ $shadowColor: #16191e;
   %navigationArrow {
     width: 30px;
     height: 30px;
-    place-self: center;
+    background-position: center;
   }
 
+  .view {
+    background-image: url(../../public/Assets/desktop.svg);
+    width: 30px;
+    height: 30px;
+  }
+  .active {
+    background-image: url(../../public/Assets/desktop_on.svg);
+  }
   .forward {
     @extend %navigationArrow;
     background-image: url(../../public/Assets/Right.svg);
@@ -108,26 +153,32 @@ $shadowColor: #16191e;
     background-image: url(../../public/Assets/Left.svg);
   }
 
-  %navigationTrack {
-    place-self: center center;
-    grid-column: 2;
-    grid-row: 1;
+  .project-selection {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    max-width: 300px;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .dropDown {
-    @extend %navigationTrack;
-    //width: 220px;
-    //height: 70%;
-    border: 2px solid $color4;
-    border-radius: 10px;
+    width: 100%;
+    max-width: 180px;
+    .btn-primary {
+      width: 100%;
+      height: 5vh;
+      border: 2px solid $color4;
+      border-radius: 10px;
+      text-align: center;
+    }
   }
 
   .tracker {
-    @extend %navigationTrack;
     width: 62px;
     height: 62px;
-    max-height: 100%;
-    margin: 0 0 0 320px;
+    max-height: 90vh;
     border-radius: 45px;
     border: 2px solid $color4;
     background-color: transparent;
@@ -137,8 +188,79 @@ $shadowColor: #16191e;
   }
 }
 
-@media screen and (max-height: 900px) {
+@media screen and (max-width: 425px) {
+  %mobileTextBase {
+    bottom: 5px;
+    top: auto;
+
+    font-style: normal;
+  }
   .Viewer {
-    max-width: 280px;
+    max-width: 100%;
+    max-height: 90%;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .Screen {
+    position: absolute;
+    display: initial;
+    height: 100%;
+
+    overflow: visible;
+
+    .title {
+      bottom: 6.5%;
+      top: auto;
+      right: 10px;
+      left: 10px;
+      z-index: 1;
+    }
+
+    h1 {
+      @extend %mobileTextBase;
+      color: #fafafa;
+      font-size: 1.5vh;
+      margin: 0 0 5px 0;
+      letter-spacing: 0.05em;
+      line-height: normal;
+    }
+
+    .portfolio-text {
+      font-size: 2vh;
+      top: auto;
+    }
+    .portfolio-blur {
+      font-size: 2vh;
+      top: auto;
+    }
+  }
+  .view {
+    display: none;
+  }
+
+  .NavBar {
+    height: 10%;
+    padding: 15px 10px 5px 10px;
+
+    .project-selection {
+      justify-content: center;
+    }
+
+    .dropDown {
+      width: 100%;
+      margin: 0;
+      .btn-primary {
+        width: 100%;
+        height: 5vh;
+        border: 2px solid $color4;
+        border-radius: 10px;
+      }
+    }
+
+    .tracker {
+      display: none;
+    }
   }
 }

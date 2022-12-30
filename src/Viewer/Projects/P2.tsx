@@ -67,7 +67,7 @@ const P2 = () => {
           </ListGroup>
           <div className="chart-container">
             <div>{`${focus} last 7 days`}</div>
-            <LineChart data={data[focus].data} focus={focus} />
+            <LineChart data={data[focus].data} focus={focus} range={48} />
           </div>
         </div>
       </div>
